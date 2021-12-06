@@ -1,0 +1,45 @@
+{
+	"name": "one-dark-operator-theme",
+	"displayName": "One Dark Operator Theme",
+	"description": "Atom's One Dark theme optimized for use with Operator Mono",
+	"version": "0.0.2",
+	"publisher": "kvnxush",
+	"icon": "icon.png",
+	"engines": {
+		"vscode": "^1.14.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "One Dark Operator Theme",
+				"uiTheme": "vs-dark",
+				"path": "./themes/One Dark Operator Theme-color-theme.json"
+			}
+		]
+	},
+	"keywords": [
+		"vscode",
+		"theme",
+		"onedark",
+		"operator"
+	],
+	"author": "Kevin Ushijima <kju204@gmail.com>",
+	"license": "MIT",
+	"homepage": "https://github.com/kvnxush/one-dark-operator-theme/blob/master/README.md",
+	"bugs": {
+		"url": "https://github.com/kvnxush/one-dark-operator-theme/issues",
+		"email": "kju204@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kvnxush/one-dark-operator-theme.git"
+	},
+	"__metadata": {
+		"id": "405e7cc3-5aba-4791-9695-86569f89ad84",
+		"publisherId": "cb60aa93-8b04-4ba4-bbda-d05aea115115",
+		"publisherDisplayName": "Kevin Ushijima"
+	}
+}

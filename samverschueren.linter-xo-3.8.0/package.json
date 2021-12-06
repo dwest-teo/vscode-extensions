@@ -1,0 +1,185 @@
+{
+	"name": "linter-xo",
+	"description": "Linter for XO",
+	"version": "3.8.0",
+	"author": {
+		"name": "Spencer Snyder",
+		"email": "sasnyde2@gmail.com",
+		"url": "https://spencersnyder.io"
+	},
+	"activationEvents": [
+		"onStartupFinished",
+		"onCommand:xo.fix"
+	],
+	"bugs": {
+		"url": "https://github.com/xojs/vscode-linter-xo/issues"
+	},
+	"categories": [
+		"Linters",
+		"Formatters"
+	],
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "XO",
+			"properties": {
+				"xo.enable": {
+					"scope": "window",
+					"type": "boolean",
+					"default": true,
+					"description": "Control whether xo is enabled or not."
+				},
+				"xo.options": {
+					"scope": "resource",
+					"type": "object",
+					"default": {},
+					"description": "The xo options object to provide args to the xo command."
+				},
+				"xo.format.enable": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": false,
+					"description": "Enable 'xo --fix' as formatter"
+				},
+				"xo.overrideSeverity": {
+					"scope": "resource",
+					"type": "string",
+					"default": "off",
+					"enum": [
+						"off",
+						"info",
+						"warn",
+						"error"
+					],
+					"description": "Override the severity of found issues."
+				},
+				"xo.debounce": {
+					"scope": "window",
+					"type": "number",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 350,
+					"description": "A number between 0 and 350 to debounce lint requests for xo. A higher number can improve performance on large files but may make performance worse on small files."
+				},
+				"xo.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the XO server."
+				},
+				"xo.path": {
+					"scope": "resource",
+					"type": [
+						"string",
+						null
+					],
+					"default": null,
+					"pattern": "^(.{0,2}/).*(.js)$",
+					"description": "An absolute or relative path to resolve xo from. Relative paths resolve with respect to the workspace folder."
+				},
+				"xo.runtime": {
+					"scope": "window",
+					"type": [
+						"string",
+						null
+					],
+					"default": null,
+					"description": "Absolute path to a node binary to run the xo server, defaults to VSCode's internally bundled node version."
+				}
+			}
+		},
+		"commands": [
+			{
+				"title": "Fix all auto-fixable problems",
+				"category": "XO",
+				"command": "xo.fix"
+			},
+			{
+				"title": "Show Output Channel",
+				"category": "XO",
+				"command": "xo.showOutputChannel"
+			}
+		]
+	},
+	"dependencies": {
+		"auto-bind": "4",
+		"is-string-and-not-blank": "^0.0.2",
+		"load-json-file": "6",
+		"lodash.debounce": "^4.0.8",
+		"pkg-dir": "5",
+		"queue": "^6.0.2",
+		"vscode-languageclient": "^7.0.0",
+		"vscode-languageserver": "^7.0.0",
+		"vscode-languageserver-textdocument": "^1.0.2",
+		"vscode-uri": "^3.0.2"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "14.1.0",
+		"@commitlint/config-conventional": "14.1.0",
+		"@types/vscode": "^1.61.0",
+		"esbuild": "^0.13.13",
+		"fixpack": "^4.0.0",
+		"husky": "^7.0.4",
+		"lint-staged": "11.2.6",
+		"prettier": "^2.4.1",
+		"rimraf": "^3.0.2",
+		"xo": "^0.46.4"
+	},
+	"displayName": "XO",
+	"engines": {
+		"vscode": "^1.61.0",
+		"node": ">12"
+	},
+	"homepage": "https://github.com/xojs/xo",
+	"icon": "icon.png",
+	"keywords": [
+		"code style",
+		"eslint",
+		"formatter",
+		"linter",
+		"xo"
+	],
+	"license": "MIT",
+	"main": "./dist/client.js",
+	"prettier": {
+		"trailingComma": "none"
+	},
+	"publisher": "samverschueren",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xojs/vscode-linter-xo"
+	},
+	"scripts": {
+		"build": "npm run clean && npm run build:client && npm run build:server",
+		"build:client": "esbuild ./client/extension.js --bundle --outfile=dist/client.js --external:vscode --format=cjs --platform=node --minify",
+		"build:dev": "npm run build:client -- --sourcemap && npm run build:server -- --sourcemap",
+		"build:server": "esbuild ./server/server.js --bundle --outfile=dist/server.js --external:vscode --format=cjs --platform=node --minify",
+		"clean": "rimraf dist",
+		"lint": "xo && npm run lint:md",
+		"lint:md": "prettier --parser markdown '**/*.md' --check",
+		"prepare": "husky install",
+		"test": "npm run lint && npm run build",
+		"vscode:prepublish": "npm run build"
+	},
+	"xo": {
+		"prettier": true,
+		"rules": {
+			"unicorn/prefer-module": "off",
+			"unicorn/prevent-abbreviations": "off",
+			"import/extensions": "off",
+			"capitalized-comments": "off",
+			"no-warning-comments": "off"
+		}
+	},
+	"__metadata": {
+		"id": "fc140617-fb59-426a-87d2-e810904d10cf",
+		"publisherId": "459b7700-3b3b-4f51-b6b6-a5211342c87d",
+		"publisherDisplayName": "Sam Verschueren",
+		"installedTimestamp": 1636548761397
+	}
+}

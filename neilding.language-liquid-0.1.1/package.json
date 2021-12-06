@@ -1,0 +1,42 @@
+{
+	"name": "language-liquid",
+	"displayName": "Liquid Languages Support",
+	"description": "Liquid Languages Syntax Highlighter",
+	"version": "0.1.1",
+	"icon": "icon.png",
+	"publisher": "neilding",
+	"engines": {
+		"vscode": "^1.0.0"
+	},
+	"categories": [
+		"Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "liquid",
+				"aliases": [
+					"HTML Liquid",
+					"liquid"
+				],
+				"extensions": [
+					".liquid"
+				],
+				"configuration": "./liquid.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "liquid",
+				"scopeName": "text.html.liquid",
+				"path": "./syntaxes/liquid.tmLanguage"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "a96acff8-5197-43a6-b07c-d4d178558e56",
+		"publisherId": "1d254bc3-2751-4345-a60f-3cea562f1543",
+		"publisherDisplayName": "Neil Ding",
+		"installedTimestamp": 1618931857136
+	}
+}
